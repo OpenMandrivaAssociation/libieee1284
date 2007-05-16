@@ -1,15 +1,9 @@
-%define name	libieee1284
-%define	version	0.2.10
-%define	rel	2
-%define	release	%mkrel %{rel}
-
-%define major	3
-%define libname	%mklibname ieee1284_ %{major}
+%define libname %mklibname ieee1284_ 3
 
 Summary:	libieee1284 is a cross-platform library for parallel port access
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:		libieee1284
+Version:	0.2.10
+Release:	%mkrel 3
 Source0:	http://cyberelk.net/tim/data/libieee1284/stable/%{name}-%{version}.tar.bz2
 License:	LGPL
 Group:		System/Libraries
@@ -30,7 +24,6 @@ libieee1284 is a cross-platform library for parallel port access
 
 %package -n	%{libname}-devel
 Summary:        libieee1284 is a cross-platform library for parallel port access
-
 Group:          Development/C
 Provides:	%{name}-devel = %{version}-%{release}
 Provides:	%{name}0-devel = %{version}-%{release}
@@ -88,7 +81,6 @@ rm -rf %buildroot
 %{_bindir}/libieee1284_test
 %{_includedir}/*
 %{_libdir}/*.so
-
 %{_libdir}/*.la
 %{_mandir}/man3/*
 %{_libdir}/python%{py_ver}/site-packages/*.so
@@ -99,5 +91,3 @@ rm -rf %buildroot
 %doc README
 %{_libdir}/*.a
 %{_libdir}/python%{py_ver}/site-packages/*.a
-
-
