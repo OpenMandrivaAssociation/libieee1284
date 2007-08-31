@@ -1,14 +1,16 @@
 %define libname %mklibname ieee1284_ 3
+%define develname %mklibname ieee1284 -d
+%define staticdevelname %mklibname ieee1284 -d -s
 
 Summary:	libieee1284 is a cross-platform library for parallel port access
 Name:		libieee1284
 Version:	0.2.10
-Release:	%mkrel 3
-Source0:	http://cyberelk.net/tim/data/libieee1284/stable/%{name}-%{version}.tar.bz2
+Release:	%mkrel 4
 License:	LGPL
 Group:		System/Libraries
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 URL:		http://sourceforge.net/projects/libieee1284/
+Source0:	http://cyberelk.net/tim/data/libieee1284/stable/%{name}-%{version}.tar.bz2
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 %py_requires -d
 
 %description
@@ -17,19 +19,26 @@ libieee1284 is a cross-platform library for parallel port access
 %package -n	%{libname}
 Summary:        libieee1284 is a cross-platform library for parallel port access
 Group:          System/Libraries
+%if "%{_lib}" != "lib"
 Provides:	%{name} = %{version}-%{release}
+%endif
 
 %description -n	%{libname}
 libieee1284 is a cross-platform library for parallel port access
 
-%package -n	%{libname}-devel
+%package -n	%{develname}
 Summary:        libieee1284 is a cross-platform library for parallel port access
 Group:          Development/C
+Requires:	%{libname} = %{version}-%{release}
+Provides:       ieee1284-devel
+%if "%{_lib}" != "lib"
 Provides:	%{name}-devel = %{version}-%{release}
 Provides:	%{name}0-devel = %{version}-%{release}
-Requires:	%{libname} = %{version}-%{release}
+%endif
+Provides:	%{mklibname ieee1284_ 3 -d} = %{version}
+Obsoletes:	%{mklibname ieee1284_ 3 -d}
 
-%description -n	%{libname}-devel
+%description -n	%{develname}
 The %{name}-devel package includes the header files and .so libraries
 necessary for developing programs which will access parallel port devices 
 using the %{name} library.
@@ -38,14 +47,19 @@ If you are going to develop programs which will access parallel port
 devices, you should install %{name}-devel.  You'll also need to have
 the %{name} package installed.
 
-%package -n	%{libname}-static-devel
+%package -n	%{staticdevelname}
 Summary:        Static library for libieee1284
 Group:          Development/C
-Provides:	%{name}-static-devel = %{version}-%{release}
-Requires:	%{libname}-devel = %{version}-%{release}
+Requires:	%{develname} = %{version}-%{release}
+Provides:       ieee1284-static-devel
+%if "%{_lib}" != "lib"
+Provides:       %{name}-static-devel = %{version}-%{release}
+%endif
+Provides:       %{mklibname ieee1284_ 3 -d -s} = %{version}
+Obsoletes:      %{mklibname ieee1284_ 3 -d -s}
 
-%description -n	%{libname}-static-devel
-The %{name}-devel package includes the static libraries
+%description -n	%{staticdevelname}
+The %{staticdevelname} package includes the static libraries
 necessary for developing programs which will access parallel port devices 
 using the %{name} library.
 
@@ -54,6 +68,7 @@ devices, you should install %{name}-devel.  You'll also need to have
 the %{name} package installed.
 
 %prep
+
 %setup -q
 
 %build
@@ -61,21 +76,23 @@ the %{name} package installed.
 %make
 
 %install
-rm -rf %buildroot
+rm -rf %{buildroot}
+
 %makeinstall_std
 
-%clean
-rm -rf %buildroot
-
 %post -p /sbin/ldconfig -n %{libname}
+
 %postun -p /sbin/ldconfig -n %{libname}
+
+%clean
+rm -rf %{buildroot}
 
 %files -n %{libname}
 %defattr(-,root,root)
 %doc README
 %{_libdir}/*.so.*
 
-%files -n %{libname}-devel
+%files -n %{develname}
 %defattr(-,root,root)
 %doc README AUTHORS ChangeLog INSTALL NEWS TODO
 %{_bindir}/libieee1284_test
@@ -86,7 +103,7 @@ rm -rf %buildroot
 %{_libdir}/python%{py_ver}/site-packages/*.so
 %{_libdir}/python%{py_ver}/site-packages/*.la
 
-%files -n %{libname}-static-devel
+%files -n %{staticdevelname}
 %defattr(-,root,root)
 %doc README
 %{_libdir}/*.a
