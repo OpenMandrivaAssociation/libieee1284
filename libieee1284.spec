@@ -5,7 +5,7 @@
 Summary:	libieee1284 is a cross-platform library for parallel port access
 Name:		libieee1284
 Version:	0.2.10
-Release:	%mkrel 4
+Release:	%mkrel 5
 License:	LGPL
 Group:		System/Libraries
 URL:		http://sourceforge.net/projects/libieee1284/
@@ -19,9 +19,7 @@ libieee1284 is a cross-platform library for parallel port access
 %package -n	%{libname}
 Summary:        libieee1284 is a cross-platform library for parallel port access
 Group:          System/Libraries
-%if "%{_lib}" != "lib"
 Provides:	%{name} = %{version}-%{release}
-%endif
 
 %description -n	%{libname}
 libieee1284 is a cross-platform library for parallel port access
@@ -31,11 +29,8 @@ Summary:        libieee1284 is a cross-platform library for parallel port access
 Group:          Development/C
 Requires:	%{libname} = %{version}-%{release}
 Provides:       ieee1284-devel
-%if "%{_lib}" != "lib"
 Provides:	%{name}-devel = %{version}-%{release}
 Provides:	%{name}0-devel = %{version}-%{release}
-%endif
-Provides:	%{mklibname ieee1284_ 3 -d} = %{version}
 Obsoletes:	%{mklibname ieee1284_ 3 -d}
 
 %description -n	%{develname}
@@ -52,10 +47,7 @@ Summary:        Static library for libieee1284
 Group:          Development/C
 Requires:	%{develname} = %{version}-%{release}
 Provides:       ieee1284-static-devel
-%if "%{_lib}" != "lib"
 Provides:       %{name}-static-devel = %{version}-%{release}
-%endif
-Provides:       %{mklibname ieee1284_ 3 -d -s} = %{version}
 Obsoletes:      %{mklibname ieee1284_ 3 -d -s}
 
 %description -n	%{staticdevelname}
