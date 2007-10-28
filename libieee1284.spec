@@ -1,15 +1,16 @@
-%define libname %mklibname ieee1284_ 3
+%define major 3
+%define libname %mklibname ieee1284_ %major
 %define develname %mklibname ieee1284 -d
 %define staticdevelname %mklibname ieee1284 -d -s
 
 Summary:	libieee1284 is a cross-platform library for parallel port access
 Name:		libieee1284
-Version:	0.2.10
-Release:	%mkrel 5
+Version:	0.2.11
+Release:	%mkrel 1
 License:	LGPL
 Group:		System/Libraries
 URL:		http://sourceforge.net/projects/libieee1284/
-Source0:	http://cyberelk.net/tim/data/libieee1284/stable/%{name}-%{version}.tar.bz2
+Source0:	http://ovh.dl.sourceforge.net/sourceforge/libieee1284/%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 %py_requires -d
 
@@ -64,7 +65,7 @@ the %{name} package installed.
 %setup -q
 
 %build
-%configure
+%configure2_5x
 %make
 
 %install
@@ -82,7 +83,7 @@ rm -rf %{buildroot}
 %files -n %{libname}
 %defattr(-,root,root)
 %doc README
-%{_libdir}/*.so.*
+%{_libdir}/*.so.%{major}*
 
 %files -n %{develname}
 %defattr(-,root,root)
