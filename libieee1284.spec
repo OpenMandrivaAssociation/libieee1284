@@ -11,6 +11,7 @@ License:	LGPL
 Group:		System/Libraries
 URL:		http://sourceforge.net/projects/libieee1284/
 Source0:	http://ovh.dl.sourceforge.net/sourceforge/libieee1284/%{name}-%{version}.tar.bz2
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 %py_requires -d
 
 %description
