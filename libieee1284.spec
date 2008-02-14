@@ -3,7 +3,7 @@
 %define develname %mklibname ieee1284 -d
 %define staticdevelname %mklibname ieee1284 -d -s
 
-Summary:	libieee1284 is a cross-platform library for parallel port access
+Summary:	Cross-platform library for parallel port access
 Name:		libieee1284
 Version:	0.2.11
 Release:	%mkrel 2
@@ -18,7 +18,7 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 libieee1284 is a cross-platform library for parallel port access
 
 %package -n	%{libname}
-Summary:        libieee1284 is a cross-platform library for parallel port access
+Summary:        Cross-platform library for parallel port access
 Group:          System/Libraries
 Provides:	%{name} = %{version}-%{release}
 
@@ -26,7 +26,7 @@ Provides:	%{name} = %{version}-%{release}
 libieee1284 is a cross-platform library for parallel port access
 
 %package -n	%{develname}
-Summary:        libieee1284 is a cross-platform library for parallel port access
+Summary:        Development files for libieee1284
 Group:          Development/C
 Requires:	%{libname} = %{version}-%{release}
 Provides:       ieee1284-devel
