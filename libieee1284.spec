@@ -73,9 +73,13 @@ rm -rf %{buildroot}
 
 %makeinstall_std
 
+%if %mdkversion < 200900
 %post -p /sbin/ldconfig -n %{libname}
+%endif
 
+%if %mdkversion < 200900
 %postun -p /sbin/ldconfig -n %{libname}
+%endif
 
 %clean
 rm -rf %{buildroot}
