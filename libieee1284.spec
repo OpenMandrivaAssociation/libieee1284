@@ -6,13 +6,14 @@
 Summary:	Cross-platform library for parallel port access
 Name:		libieee1284
 Version:	0.2.11
-Release:	%mkrel 4
-License:	LGPL
+Release:	%mkrel 5
+License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://sourceforge.net/projects/libieee1284/
 Source0:	http://ovh.dl.sourceforge.net/sourceforge/libieee1284/%{name}-%{version}.tar.bz2
+Patch0:		libieee1284-0.2.11-linkage.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-%py_requires -d
+BuildRequires:	python-devel
 
 %description
 libieee1284 is a cross-platform library for parallel port access
@@ -60,18 +61,28 @@ If you are going to develop programs which will access parallel port
 devices, you should install %{name}-devel.  You'll also need to have
 the %{name} package installed.
 
-%prep
+%package -n	python-%{name}
+Group:		Development/Python
+Summary:	Python bindings for libieee2384
+Conflicts:	%{name}-devel < %{version}-%{release}
+%py_requires -d
 
+%description -n python-%{name}
+This package contains python bindings for libieee2384.
+
+%prep
 %setup -q
+%patch0 -p0
 
 %build
-%configure2_5x
+%configure2_5x --with-python
 %make
 
 %install
 rm -rf %{buildroot}
-
 %makeinstall_std
+
+rm -f %{buildroot}%{py_platsitedir}/*.{a,la}
 
 %if %mdkversion < 200900
 %post -p /sbin/ldconfig -n %{libname}
@@ -97,11 +108,12 @@ rm -rf %{buildroot}
 %{_libdir}/*.so
 %{_libdir}/*.la
 %{_mandir}/man3/*
-%{_libdir}/python%{py_ver}/site-packages/*.so
-%{_libdir}/python%{py_ver}/site-packages/*.la
 
 %files -n %{staticdevelname}
 %defattr(-,root,root)
 %doc README
 %{_libdir}/*.a
-%{_libdir}/python%{py_ver}/site-packages/*.a
+
+%files -n python-%{name}
+%defattr(-,root,root)
+%{py_platsitedir}/*.so
