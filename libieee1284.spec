@@ -52,7 +52,7 @@ This package contains python bindings for libieee2384.
 
 %build
 %configure2_5x \
-	--with-python
+	--with-python \
 	--disable-static
 
 %make
