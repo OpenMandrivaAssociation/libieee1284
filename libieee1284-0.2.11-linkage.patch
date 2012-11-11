@@ -1,0 +1,22 @@
+--- Makefile.am~	2005-01-21 15:33:54.000000000 +0100
++++ Makefile.am	2009-01-26 14:09:11.000000000 +0100
+@@ -35,7 +35,7 @@
+ if PYTHON
+ pyexec_LTLIBRARIES = src/ieee1284module.la
+ src_ieee1284module_la_LDFLAGS = -module -avoid-version
+-src_ieee1284module_la_LIBADD = libieee1284.la
++src_ieee1284module_la_LIBADD = libieee1284.la `$(PYTHON)-config --libs`
+ src_ieee1284module_la_CFLAGS = -I/usr/include/python$(PYTHON_VERSION) -fpic
+ endif
+ 
+--- Makefile.in~	2007-09-18 11:59:38.000000000 +0200
++++ Makefile.in	2009-01-26 14:09:24.000000000 +0100
+@@ -272,7 +272,7 @@
+ src_ieee1284module_la_SOURCES = src/ieee1284module.c
+ @PYTHON_TRUE@pyexec_LTLIBRARIES = src/ieee1284module.la
+ @PYTHON_TRUE@src_ieee1284module_la_LDFLAGS = -module -avoid-version
+-@PYTHON_TRUE@src_ieee1284module_la_LIBADD = libieee1284.la
++@PYTHON_TRUE@src_ieee1284module_la_LIBADD = libieee1284.la `$(PYTHON)-config --libs`
+ @PYTHON_TRUE@src_ieee1284module_la_CFLAGS = -I/usr/include/python$(PYTHON_VERSION) -fpic
+ man3_MANS = doc/libieee1284.3 \
+ 	doc/parport.3 \
