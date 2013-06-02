@@ -30,7 +30,6 @@ Group:		Development/C
 Requires:	%{libname} = %{version}-%{release}
 Provides:	ieee1284-devel
 Provides:	%{name}-devel = %{version}-%{release}
-Obsoletes:	%{mklibname ieee1284_ 3 -d} < 0.2.11-12
 
 %description -n	%{devname}
 The %{name}-devel package includes the header files and .so libraries
@@ -38,9 +37,8 @@ necessary for developing programs which will access parallel port devices
 using the %{name} library.
 
 %package -n	python-%{name}
-Group:		Development/Python
 Summary:	Python bindings for libieee2384
-Conflicts:	%{name}-devel < %{version}-%{release}
+Group:		Development/Python
 %py_requires -d
 
 %description -n python-%{name}
