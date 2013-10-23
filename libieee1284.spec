@@ -14,7 +14,7 @@ Patch0:		libieee1284-0.2.11-linkage.patch
 BuildRequires:	pkgconfig(python)
 
 %description
-libieee1284 is a cross-platform library for parallel port access
+libieee1284 is a cross-platform library for parallel port access.
 
 %package -n	%{libname}
 Summary:	Cross-platform library for parallel port access
@@ -39,7 +39,7 @@ using the %{name} library.
 %package -n	python-%{name}
 Summary:	Python bindings for libieee2384
 Group:		Development/Python
-%py_requires -d
+Requires:	pkgconfig(python)
 
 %description -n python-%{name}
 This package contains python bindings for libieee2384.
