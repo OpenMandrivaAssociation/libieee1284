@@ -11,7 +11,7 @@ Group:		System/Libraries
 Url:		http://sourceforge.net/projects/libieee1284/
 Source0:	http://ovh.dl.sourceforge.net/sourceforge/libieee1284/%{name}-%{version}.tar.bz2
 Patch0:		libieee1284-0.2.11-linkage.patch
-BuildRequires:	pkgconfig(python)
+
 
 %description
 libieee1284 is a cross-platform library for parallel port access
@@ -39,7 +39,7 @@ using the %{name} library.
 %package -n	python-%{name}
 Summary:	Python bindings for libieee2384
 Group:		Development/Python
-%py_requires -d
+BuildRequires:	pkgconfig(python)
 
 %description -n python-%{name}
 This package contains python bindings for libieee2384.
