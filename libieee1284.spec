@@ -51,7 +51,7 @@ This package contains python bindings for libieee2384.
 %build
 %configure2_5x \
 	--with-python \
-	--disable-static
+	--disable-static PYTHON=/usr/bin/python2
 
 %make
 
@@ -69,5 +69,5 @@ This package contains python bindings for libieee2384.
 %{_mandir}/man3/*
 
 %files -n python-%{name}
-%{py_platsitedir}/*.so
+%{py2_platsitedir}/*.so
 
