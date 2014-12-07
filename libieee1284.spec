@@ -5,7 +5,7 @@
 Summary:	Cross-platform library for parallel port access
 Name:		libieee1284
 Version:	0.2.11
-Release:	22
+Release:	23
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://sourceforge.net/projects/libieee1284/
