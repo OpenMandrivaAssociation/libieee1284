@@ -2,6 +2,7 @@
 %define libname %mklibname ieee1284_ %{major}
 %define devname %mklibname ieee1284 -d
 
+%define _disable_lto 1
 Summary:	Cross-platform library for parallel port access
 Name:		libieee1284
 Version:	0.2.11
