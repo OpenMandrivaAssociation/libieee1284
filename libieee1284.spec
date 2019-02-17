@@ -6,10 +6,10 @@
 Summary:	Cross-platform library for parallel port access
 Name:		libieee1284
 Version:	0.2.11
-Release:	28
+Release:	29
 License:	LGPLv2+
 Group:		System/Libraries
-Url:		http://sourceforge.net/projects/libieee1284/
+Url:		https://github.com/twaugh/libieee1284
 Source0:	http://ovh.dl.sourceforge.net/sourceforge/libieee1284/%{name}-%{version}.tar.bz2
 Patch0:		libieee1284-0.2.11-linkage.patch
 BuildRequires:	pkgconfig(python)
