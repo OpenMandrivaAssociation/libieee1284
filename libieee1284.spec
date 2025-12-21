@@ -19,6 +19,11 @@ Group:		System/Libraries
 Url:		https://github.com/twaugh/libieee1284
 Source0:	http://ovh.dl.sourceforge.net/sourceforge/libieee1284/%{name}-%{version}.tar.bz2
 Patch0:		libieee1284-0.2.11-linkage.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig(python2)
 
 %description
