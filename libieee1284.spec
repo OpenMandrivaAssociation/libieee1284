@@ -1,3 +1,5 @@
+%define _disable_ld_no_undefined 1
+
 # libieee1284 is used by wine
 %ifarch %{x86_64}
 %bcond_without compat32
@@ -9,22 +11,26 @@
 %define lib32name %mklib32name ieee1284_ %{major}
 %define dev32name %mklib32name ieee1284 -d
 
+%define git 20250127
+
 #define _disable_lto 1
 Summary:	Cross-platform library for parallel port access
 Name:		libieee1284
 Version:	0.2.11
-Release:	32
+Release:	%{git}.33
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		https://github.com/twaugh/libieee1284
 Source0:	http://ovh.dl.sourceforge.net/sourceforge/libieee1284/%{name}-%{version}.tar.bz2
-Patch0:		libieee1284-0.2.11-linkage.patch
+# git taken from https://github.com/twaugh/libieee1284
+
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool-base
 BuildRequires:	slibtool
 BuildRequires:	make
-BuildRequires:	pkgconfig(python2)
+BuildRequires:	xmlto
+BuildRequires:	pkgconfig(python3) python
 
 %description
 libieee1284 is a cross-platform library for parallel port access.
@@ -76,10 +82,10 @@ using the %{name} library.
 %endif
 
 %prep
-%autosetup -p0
+%autosetup -p1
 
 export CONFIGURE_TOP="$(pwd)"
-
+./bootstrap
 %if %{with compat32}
 mkdir build32
 cd build32
@@ -91,7 +97,7 @@ mkdir build
 cd build
 %configure \
 	--with-python \
-	--disable-static PYTHON=/usr/bin/python2
+	--disable-static
 
 %build
 %if %{with compat32}
@@ -113,10 +119,11 @@ cd build
 %{_bindir}/libieee1284_test
 %{_includedir}/*
 %{_libdir}/*.so
+%{_libdir}/pkgconfig/libieee1284.pc
 %{_mandir}/man3/*
 
 %files -n python-%{name}
-%{py2_platsitedir}/*.so
+%{python_sitearch}/ieee1284module.so
 
 %if %{with compat32}
 %files -n %{lib32name}
@@ -124,4 +131,5 @@ cd build
 
 %files -n %{dev32name}
 %{_prefix}/lib/*.so
+%{_prefix}/lib/pkgconfig/libieee1284.pc
 %endif
