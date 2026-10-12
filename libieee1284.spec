@@ -17,7 +17,7 @@
 Summary:	Cross-platform library for parallel port access
 Name:		libieee1284
 Version:	0.2.11
-Release:	%{git}.34
+Release:	%{git}.35
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		https://github.com/twaugh/libieee1284
@@ -89,7 +89,12 @@ export CONFIGURE_TOP="$(pwd)"
 %if %{with compat32}
 mkdir build32
 cd build32
+# clang cannot build the 32-bit library
+export CC=gcc
+export CXX=g++
 %configure32 --without-python
+unset CC
+unset CXX
 cd ..
 %endif
 
@@ -127,9 +132,9 @@ cd build
 
 %if %{with compat32}
 %files -n %{lib32name}
-%{_prefix}/lib/libieee1284.so.%{major}*
+%{_usr}/lib/libieee1284.so.%{major}*
 
 %files -n %{dev32name}
-%{_prefix}/lib/*.so
-%{_prefix}/lib/pkgconfig/libieee1284.pc
+%{_usr}/lib/*.so
+%{_usr}/lib/pkgconfig/libieee1284.pc
 %endif
